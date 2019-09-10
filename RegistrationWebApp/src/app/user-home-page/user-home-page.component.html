@@ -1,0 +1,142 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="header">
+    <app-header></app-header>
+</div>
+<div *ngIf="this.db.loggedInUser != null">
+    <div class="container">
+
+       <div class="row helloClock">
+            <div class="col">
+                    <div class="name">
+                            <strong>שלום {{this.db.loggedInUser.firstName}}</strong>
+                        </div>
+            </div>
+        
+            <div class="col">
+                    <div *ngIf="this.comp_settings != undefined">
+                            <div *ngIf="this.comp_settings.is_opened" class="row aside">
+                                <div class="wrapper">
+                                    <div class="main-content">
+                                        <div class="counterDown text-center">
+                                            <legend>
+                                                <strong>לסגירת ההרשמה נותרו</strong>
+                                            </legend>
+                                            <div id="demo">
+                                                <div id="minutes" class="text-center"></div>
+                                                <div id="heures" class="text-center"></div>
+                                                <div id="jours" class="text-center"></div>
+                                            </div>
+                                            <div id="infos">
+                                                <div class="infos-minutes">דקות</div>
+                                                <div class="infos-heures">שעות</div>
+                                                <div class="infos-jours">ימים</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+       </div>
+
+        <div *ngIf="this.db.loggedInUser.type == 'תלמיד'">
+
+                <div *ngIf="this.userProject!=undefined && this.userProject.inCompetition!=undefined && this.db.loggedInUser.compResultMsg!=undefined" class="row" id="acceptedStudent">
+                        <div><br></div>
+                     <div class="notice notice-success">
+                             <div class="noticText">
+                                    <div class="row">
+                                            <div class="col-sm-2">
+                                                    <div *ngIf="this.userProject.inCompetition == true">
+                                                            <img src="../../assets/certification-icon-9.jpg"/>
+                                                    </div>
+                                                    <div *ngIf="this.userProject.inCompetition == false">
+                                                            <img src="../../assets/attention .png"/>
+                                                    </div>
+                                            </div>
+                                             <div class="col-sm-8"><p>{{this.db.loggedInUser.compResultMsg}}</p></div>
+                                    </div>
+                             </div>
+                     </div>
+                 </div>
+
+            <div class="row" id="userstatus">
+                <legend>
+                    <strong>סטאטוס הרשמה</strong>
+                </legend>
+                <div class="notice notice-info">
+                    <strong>{{workExists}}</strong>
+                </div>
+                <div *ngIf="this.userProject && emptyFields.length != 0">
+                    <div class="notice notice-success">
+                        <strong>שים לב - בטופס הגשת הפרוייקט חסרים הפרטים הבאים:</strong>
+                        <div *ngFor="let i of emptyFields">
+                            <li>{{i}}</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="this.db.loggedInUser.type == 'מורה'">
+            <div class="row" id="userstatus">
+                <legend>עבודות של התלמידים שלי</legend>
+                <div class="notice notice-success">
+                    <div *ngFor="let i of user_projects; let k = index">
+                        <li>
+                            <b>{{i}}</b> - {{missing_details[k]}}, {{missing_file[k]}}, {{missing_recommendation[k]}}</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="row">
+                        <legend>
+                            <strong>סטאטוס הודעות</strong>
+                        </legend>
+                        <div class="notice notice-info">
+                            <i class="glyphicon glyphicon-comment">
+                                <strong>הודעות</strong>
+                            </i>
+                            <div *ngIf="this.msg_counter>0">
+                                <strong>{{msg_counter}} הודעות חדשות</strong>
+                            </div>
+                            <div *ngIf="this.msg_counter==0">
+                                אין הודעות חדשות
+                            </div>
+            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <legend>
+                            <strong>קישורים</strong>
+                        </legend>
+                        <div class="notice notice-info">
+                            <a href="http://www.mada.org.il/young">הדף הראשי של התחרות</a>
+                            <br>
+                            <a href="https://student.societyforscience.org/intel-isef">אתר התחרות בארה"ב</a>
+                            <br>
+                            <a href="https://ec.europa.eu/research/eucys/index.cfm?pg=home">אתר התחרות באירופה</a>
+                            <br>
+                            <a href="https://www.mada.org.il/young/about">אודות התחרות</a>
+                            <br>
+                            <div *ngIf="this.db.loggedInUser.type =='מורה'">
+                                <a href="http://yharshama.mada.org.il/young-recommendation-2016.doc">הורדת טופס המלצה</a>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+    
+</div>
+
+
+<div class="page-footer">
+    <app-footer></app-footer>
+</div>

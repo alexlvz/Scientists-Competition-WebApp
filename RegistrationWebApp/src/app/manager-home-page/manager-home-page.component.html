@@ -1,0 +1,72 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="header">
+    <app-header></app-header>
+</div>
+
+
+<div *ngIf="this.db.loggedInUser != null">
+    <div class="container">
+
+        <div class="row helloClock">
+            <div class="col">
+                <div class="name">
+                    <strong>שלום {{this.db.loggedInUser.firstName}}</strong>
+                </div>
+            </div>
+
+            <div class="col">
+                <div *ngIf="this.comp_settings != undefined">
+                    <div *ngIf="this.comp_settings.is_opened" class="row aside">
+                        <div class="wrapper">
+                            <div class="main-content">
+                                <div class="counterDown text-center">
+                                    <legend>
+                                        <strong>לסגירת ההרשמה נותרו</strong>
+                                    </legend>
+                                    <div id="demo">
+                                        <div id="minutes" class="text-center"></div>
+                                        <div id="heures" class="text-center"></div>
+                                        <div id="jours" class="text-center"></div>
+                                    </div>
+                                    <div id="infos">
+                                        <div class="infos-minutes">דקות</div>
+                                        <div class="infos-heures">שעות</div>
+                                        <div class="infos-jours">ימים</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <legend>
+                <strong>סטאטוס הודעות</strong>
+            </legend>
+            <div class="notice notice-info">
+                <i class="glyphicon glyphicon-comment">
+                    <strong>הודעות</strong>
+                </i>
+                <div *ngIf="this.msg_counter>0">
+                    <strong>{{msg_counter}} הודעות חדשות</strong>
+                </div>
+                <div *ngIf="this.msg_counter==0">
+                    אין הודעות חדשות
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="footer">
+    <app-footer></app-footer>
+</div>
